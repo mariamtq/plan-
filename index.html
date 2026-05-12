@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Integrated Compliance Assurance Plan | FY26–FY28</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --bg:#0e1117;
+  --card:#161b22;
+  --border:#30363d;
+  --text:#e6edf3;
+  --muted:#8b949e;
+
+  --l1:#f5c842;
+  --l2:#2dd4bf;
+  --l3:#a78bfa;
+
+  --ct:#38bdf8;
+  --att:#4ade80;
+  --tr:#fb923c;
+  --mon:#c084fc;
+  --cr:#22d3ee;
+  --aud:#f43f5e;
+  --reg:#facc15;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto;
+  font-size:14px;
+}
+
+header {
+  padding:32px;
+  border-bottom:2px solid var(--border);
+}
+header h1 { font-size:28px; }
+header p { color:var(--muted); margin-top:8px; }
+
+.main { padding:32px; }
+
+.legend {
+  display:flex; gap:24px; flex-wrap:wrap;
+  margin-bottom:32px;
+}
+.legend-group { font-size:12px; }
+.legend-group strong { display:block; margin-bottom:6px; }
+.legend-item {
+  display:flex; align-items:center; gap:6px;
+  margin-bottom:4px;
+}
+.dot { width:10px; height:10px; border-radius:2px; }
+.bar { width:18px; height:4px; border-radius:2px; }
+
+.regime {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-bottom:16px;
+  overflow:hidden;
+}
+
+.regime-header {
+  padding:16px 20px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  cursor:pointer;
+  background:#1f242c;
+}
+.regime-header:hover { background:#242a33; }
+
+.regime-title {
+  font-weight:600;
+  min-width:220px;
+}
+.regime-name {
+  color:var(--muted);
+  flex:1;
+}
+.toggle {
+  color:var(--muted);
+}
+.regime.collapsed .regime-body { display:none; }
+.regime.collapsed .toggle { transform:rotate(-90deg); }
+
+.regime-body { padding:16px 20px 20px; }
+
+.grid {
+  display:grid;
+  grid-template-columns:140px repeat(12,1fr);
+  font-size:12px;
+}
+.grid-header {
+  font-weight:600;
+  background:#1f242c;
+}
+.cell {
+  border-right:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  padding:6px;
+}
+.cell:last-child { border-right:none; }
+
+.year {
+  grid-column:span 4;
+  text-align:center;
+  border-right:2px solid var(--border);
+}
+
+.lod {
+  font-weight:600;
+}
+.lod-1 { color:var(--l1); }
+.lod-2 { color:var(--l2); }
+.lod-3 { color:var(--l3); }
+
+.pill {
+  font-size:11px;
+  padding:2px 5px;
+  border-left:3px solid;
+  margin-bottom:4px;
+  border-radius:2px;
+}
+
+.ct { border-color:var(--ct); background:rgba(56,189,248,.15); }
+.att { border-color:var(--att); background:rgba(74,222,128,.15); }
+.tr { border-color:var(--tr); background:rgba(251,146,60,.15); }
+.mon { border-color:var(--mon); background:rgba(192,132,252,.15); }
+.cr { border-color:var(--cr); background:rgba(34,211,238,.15); }
+.aud { border-color:var(--aud); background:rgba(244,63,94,.15); }
+.reg { border-color:var(--reg); background:rgba(250,204,21,.15); }
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Integrated Compliance Assurance Plan</h1>
+  <p>FY2026–FY2028 · Tier 1 Legislation · All Lines of Defence</p>
+</header>
+
+<div class="main">
+
+<div class="legend">
+  <div class="legend-group">
+    <strong>Lines of Defence</strong>
+    <div class="legend-item"><span class="bar" style="background:var(--l1)"></span>Line 1 – Business</div>
+    <div class="legend-item"><span class="bar" style="background:var(--l2)"></span>Line 2 – Compliance / Risk</div>
+    <div class="legend-item"><span class="bar" style="background:var(--l3)"></span>Line 3 – Internal Audit</div>
+  </div>
+  <div class="legend-group">
+    <strong>Assurance Type</strong>
+    <div class="legend-item"><span class="dot" style="background:var(--ct)"></span>Controls Testing</div>
