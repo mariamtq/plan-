@@ -19,8 +19,8 @@
 
   --ct:#38bdf8;
   --att:#4ade80;
-  --tr:#fb923c;
   --mon:#c084fc;
+  --tr:#fb923c;
   --cr:#22d3ee;
   --aud:#f43f5e;
   --reg:#facc15;
@@ -36,102 +36,92 @@ body {
 }
 
 header {
-  padding:32px;
+  padding:28px 36px;
   border-bottom:2px solid var(--border);
 }
-header h1 { font-size:28px; }
-header p { color:var(--muted); margin-top:8px; }
+header h1 { font-size:26px; }
+header p { color:var(--muted); margin-top:6px; }
 
 .main { padding:32px; }
 
 .legend {
-  display:flex; gap:24px; flex-wrap:wrap;
+  display:flex;
+  gap:32px;
+  flex-wrap:wrap;
   margin-bottom:32px;
+  font-size:12px;
 }
-.legend-group { font-size:12px; }
-.legend-group strong { display:block; margin-bottom:6px; }
+.legend strong { display:block; margin-bottom:6px; }
 .legend-item {
-  display:flex; align-items:center; gap:6px;
+  display:flex;
+  align-items:center;
+  gap:6px;
   margin-bottom:4px;
 }
 .dot { width:10px; height:10px; border-radius:2px; }
-.bar { width:18px; height:4px; border-radius:2px; }
+.bar { width:20px; height:4px; border-radius:2px; }
 
 .regime {
   background:var(--card);
   border:1px solid var(--border);
   border-radius:10px;
-  margin-bottom:16px;
-  overflow:hidden;
+  margin-bottom:24px;
 }
 
 .regime-header {
-  padding:16px 20px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  cursor:pointer;
+  padding:14px 20px;
   background:#1f242c;
-}
-.regime-header:hover { background:#242a33; }
-
-.regime-title {
+  border-bottom:1px solid var(--border);
+  font-size:16px;
   font-weight:600;
-  min-width:220px;
 }
-.regime-name {
-  color:var(--muted);
-  flex:1;
-}
-.toggle {
-  color:var(--muted);
-}
-.regime.collapsed .regime-body { display:none; }
-.regime.collapsed .toggle { transform:rotate(-90deg); }
-
-.regime-body { padding:16px 20px 20px; }
 
 .grid {
+  overflow-x:auto;
+}
+
+.plan-grid {
   display:grid;
-  grid-template-columns:140px repeat(12,1fr);
+  grid-template-columns:180px repeat(12,1fr);
   font-size:12px;
 }
-.grid-header {
-  font-weight:600;
-  background:#1f242c;
-}
+
 .cell {
   border-right:1px solid var(--border);
   border-bottom:1px solid var(--border);
   padding:6px;
 }
-.cell:last-child { border-right:none; }
 
-.year {
-  grid-column:span 4;
+.header-cell {
+  background:#1f242c;
+  font-weight:600;
   text-align:center;
+}
+
+.year-split {
   border-right:2px solid var(--border);
 }
 
-.lod {
+.lod-cell {
   font-weight:600;
 }
-.lod-1 { color:var(--l1); }
-.lod-2 { color:var(--l2); }
-.lod-3 { color:var(--l3); }
+.l1 { color:var(--l1); }
+.l2 { color:var(--l2); }
+.l3 { color:var(--l3); }
 
 .pill {
   font-size:11px;
-  padding:2px 5px;
+  padding:2px 6px;
   border-left:3px solid;
-  margin-bottom:4px;
   border-radius:2px;
+  margin-bottom:4px;
+  white-space:nowrap;
 }
 
 .ct { border-color:var(--ct); background:rgba(56,189,248,.15); }
 .att { border-color:var(--att); background:rgba(74,222,128,.15); }
-.tr { border-color:var(--tr); background:rgba(251,146,60,.15); }
 .mon { border-color:var(--mon); background:rgba(192,132,252,.15); }
+.tr { border-color:var(--tr); background:rgba(251,146,60,.15); }
 .cr { border-color:var(--cr); background:rgba(34,211,238,.15); }
 .aud { border-color:var(--aud); background:rgba(244,63,94,.15); }
 .reg { border-color:var(--reg); background:rgba(250,204,21,.15); }
@@ -148,12 +138,77 @@ header p { color:var(--muted); margin-top:8px; }
 <div class="main">
 
 <div class="legend">
-  <div class="legend-group">
+  <div>
     <strong>Lines of Defence</strong>
     <div class="legend-item"><span class="bar" style="background:var(--l1)"></span>Line 1 – Business</div>
     <div class="legend-item"><span class="bar" style="background:var(--l2)"></span>Line 2 – Compliance / Risk</div>
     <div class="legend-item"><span class="bar" style="background:var(--l3)"></span>Line 3 – Internal Audit</div>
   </div>
-  <div class="legend-group">
+  <div>
     <strong>Assurance Type</strong>
     <div class="legend-item"><span class="dot" style="background:var(--ct)"></span>Controls Testing</div>
+    <div class="legend-item"><span class="dot" style="background:var(--att)"></span>Attestation</div>
+    <div class="legend-item"><span class="dot" style="background:var(--mon)"></span>Monitoring</div>
+    <div class="legend-item"><span class="dot" style="background:var(--tr)"></span>Thematic Review</div>
+    <div class="legend-item"><span class="dot" style="background:var(--cr)"></span>Compliance Review</div>
+    <div class="legend-item"><span class="dot" style="background:var(--aud)"></span>Internal Audit</div>
+    <div class="legend-item"><span class="dot" style="background:var(--reg)"></span>Regulatory Engagement</div>
+  </div>
+</div>
+
+<div id="plan"></div>
+
+</div>
+
+<script>
+const YEARS = ["FY26","FY26","FY26","FY26","FY27","FY27","FY27","FY27","FY28","FY28","FY28","FY28"];
+const ASSURANCE = ["ct","att","mon","tr","cr","aud","reg"];
+
+const REGIMES = [
+  ["AML/CFT Act 2009"],
+  ["CCCFA 2003"],
+  ["FMCA (CoFI)"],
+  ["FMCA Part 7 – Climate Related Disclosures"],
+  ["Deposit Takers Act"],
+  ["Insurance (Prudential Supervision) Act"],
+  ["Health & Safety at Work Act 2015"],
+  ["Contracts of Insurance Act 2024"]
+];
+
+function buildCells(types) {
+  return YEARS.map((_,i) => {
+    let cell = `<div class="cell ${i%4===3?'year-split':''}">`;
+    types.forEach(t => {
+      cell += `<div class="pill ${t}">${t.toUpperCase()}</div>`;
+    });
+    return cell + `</div>`;
+  }).join("");
+}
+
+const root = document.getElementById("plan");
+
+REGIMES.forEach(r => {
+  root.innerHTML += `
+  <div class="regime">
+    <div class="regime-header">${r[0]}</div>
+    <div class="grid">
+      <div class="plan-grid">
+        <div class="cell header-cell">Line of Defence</div>
+        ${YEARS.map((y,i)=>`<div class="cell header-cell ${i%4===3?'year-split':''}">${['Q1','Q2','Q3','Q4'][i%4]}</div>`).join("")}
+
+        <div class="cell lod-cell l1">Line 1 – Business</div>
+        ${buildCells(["mon","att","ct"])}
+
+        <div class="cell lod-cell l2">Line 2 – Compliance</div>
+        ${buildCells(["ct","cr","tr","reg"])}
+
+        <div class="cell lod-cell l3">Line 3 – Internal Audit</div>
+        ${buildCells(["aud"])}
+      </div>
+    </div>
+  </div>`;
+});
+</script>
+
+</body>
+</html>
